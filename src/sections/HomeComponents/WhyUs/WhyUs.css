@@ -73,12 +73,22 @@
       grid-template-columns: repeat(2, 1fr);
     }
   }
-  
   @media (max-width: 600px) {
     .features-grid {
       grid-template-columns: 1fr;
     }
   
+    .feature-card {
+      width: 90%; /* Reduce width on smaller screens */
+      padding: 15px; /* Reduce padding */
+      margin: 0 auto; /* Center the cards */
+    }
+
+    .feature-icon {
+      width: 50px; /* Reduce icon size */
+      height: 50px;
+    }
+
     .tnc-heading {
       font-size: 28px;
     }
@@ -88,12 +98,10 @@
     }
   
     .feature-title {
-      font-size: 18px;
+      font-size: 16px; /* Reduce title font size */
     }
   
     .feature-description {
-      font-size: 14px;
+      font-size: 13px; /* Reduce description font size */
     }
-  }
-  
-  
+}

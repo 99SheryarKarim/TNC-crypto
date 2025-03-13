@@ -115,10 +115,9 @@
     }
 }
 
-/* 🔹 Responsive Design for Tablets & Mobile */
-@media (max-width: 1024px) {
+/* 🔹 Responsive Design for Tablets & Mobile */@media (max-width: 1024px) {
     .hero {
-        flex-direction: column;
+        flex-direction: column-reverse; /* Moves image above text */
         text-align: center;
         height: auto;
         padding: 10% 5%;
@@ -140,65 +139,6 @@
     .hero-left p {
         font-size: 18px;
         max-width: 100%;
-    }
-
-    .hero-image {
-        width: 70%;
-    }
-}
-
-@media (max-width: 768px) {
-    .hero {
-        gap: 20px;
-    }
-
-    .hero-left h1 {
-        font-size: 28px;
-    }
-
-    .hero-left p {
-        font-size: 16px;
-    }
-
-    .hero-buttons {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .pricing-btn,
-    .download-btn {
-        width: 100%;
-        max-width: 280px;
-        text-align: center;
-    }
-
-    .hero-image {
-        width: 60%;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero {
-        padding: 15% 5%;
-    }
-
-    .hero-left h1 {
-        font-size: 24px;
-    }
-
-    .hero-left p {
-        font-size: 14px;
-    }
-
-    .hero-buttons {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .pricing-btn,
-    .download-btn {
-        width: 100%;
-        max-width: 260px;
     }
 
     .hero-image {
