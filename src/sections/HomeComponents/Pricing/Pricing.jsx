@@ -3,7 +3,7 @@
 import { Check, X } from "lucide-react";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import "./pricing.css";
+import "../Pricing/Pricing.css";
 
 export default function Pricing() {
   const [hoveredCard, setHoveredCard] = useState(null);
