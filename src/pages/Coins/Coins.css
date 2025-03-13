@@ -1,0 +1,95 @@
+.coins-section {
+    padding: 60px 5%;
+    background-color: #121212; /* Matching dark background */
+    color: white;
+    text-align: center;
+  }
+  
+  .coins-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  
+  .loading-text {
+    font-size: 1.2rem;
+    color: #bbb;
+  }
+  
+  .coins-table-wrapper {
+    overflow-x: auto;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.1);
+  }
+  
+  .coins-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  
+  .coins-table thead {
+    background-color: #252525;
+  }
+  
+  .coins-table th,
+  .coins-table td {
+    padding: 15px;
+    text-align: left;
+    font-size: 1rem;
+  }
+  
+  .coins-table th {
+    font-weight: bold;
+    text-transform: uppercase;
+    border-bottom: 2px solid #333;
+  }
+  
+  .coins-table tbody tr {
+    border-bottom: 1px solid #333;
+    transition: background 0.3s ease;
+  }
+  
+  .coins-table tbody tr:hover {
+    background-color: #292929;
+  }
+  
+  .coin-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .coin-image {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
+  
+  .positive {
+    color: #00ff7f; /* Green for positive changes */
+  }
+  
+  .negative {
+    color: #ff6b6b; /* Softer red for negative changes */
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .coins-title {
+      font-size: 2rem;
+    }
+  
+    .coins-table th,
+    .coins-table td {
+      font-size: 0.9rem;
+    }
+  
+    .coin-image {
+      width: 25px;
+      height: 25px;
+    }
+  }
+  

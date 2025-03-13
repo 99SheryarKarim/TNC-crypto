@@ -1,0 +1,99 @@
+/* Main container styles */
+.tnc-container {
+    max-width: 1550px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #ffffff;
+  }
+  
+  /* Heading styles */
+  .tnc-heading {
+    font-size: 36px;
+    color: #4a3a3a;
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+  
+  /* Subtitle styles */
+  .tnc-subtitle {
+    font-size: 18px;
+    color: #777;
+    margin-bottom: 50px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+  }
+  
+  /* Features grid layout */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* gap: 10px; */
+  }
+  
+  /* Feature card styles */
+  .feature-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  /* Feature icon styles */
+  .feature-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Feature title styles */
+  .feature-title {
+    font-size: 20px;
+    color: #4a3a3a;
+    margin-bottom: 15px;
+    font-weight: 600;
+  }
+  
+  /* Feature description styles */
+  .feature-description {
+    font-size: 16px;
+    color: #777;
+    line-height: 1.5;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 900px) {
+    .features-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .features-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .tnc-heading {
+      font-size: 28px;
+    }
+  
+    .tnc-subtitle {
+      font-size: 16px;
+    }
+  
+    .feature-title {
+      font-size: 18px;
+    }
+  
+    .feature-description {
+      font-size: 14px;
+    }
+  }
+  
+  

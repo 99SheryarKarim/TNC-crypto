@@ -1,0 +1,119 @@
+.faq-container {
+    max-width: 1550px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background-color: white;
+    font-family: Arial, sans-serif;
+  }
+  
+  .faq-heading {
+    text-align: center;
+    font-size: 36px;
+    color: #272222;
+    margin-bottom: 16px;
+    
+    font-weight: 600;
+  }
+  
+  .faq-subtitle {
+    text-align: center;
+    font-size: 18px;
+    color: #aca4a4;
+    margin-bottom: 50px;
+  
+    max-width: 600px;
+    margin: 0 auto 50px;
+    line-height: 1.5;
+  }
+  
+  .faq-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    /* border: 1px solid red; */
+    max-width: 1400px;
+    margin-left: 40px;
+  }
+  
+  .faq-column {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .faq-item {
+    background: #f8f8f8;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .faq-item:hover {
+    background: #f0f0f0;
+  }
+  
+  .faq-question {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .faq-icon {
+    font-size: 20px;
+    color: #666;
+    transition: transform 0.3s ease;
+  }
+  
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    background: white;
+  }
+  
+  .faq-answer p {
+    padding: 0 20px;
+    margin: 0;
+    color: #666;
+    line-height: 1.6;
+  }
+  
+  .faq-item.active .faq-answer {
+    max-height: 300px;
+    padding: 20px 0;
+  }
+  
+  .faq-item.active .faq-icon {
+    transform: rotate(180deg);
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .faq-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .faq-heading {
+      font-size: 28px;
+    }
+  
+    .faq-subtitle {
+      font-size: 16px;
+      padding: 0 20px;
+    }
+  
+    .faq-question {
+      padding: 15px;
+      font-size: 15px;
+    }
+  
+    .faq-answer p {
+      font-size: 14px;
+    }
+  }
+  
+  
