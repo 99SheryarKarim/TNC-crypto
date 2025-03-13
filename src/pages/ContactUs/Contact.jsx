@@ -33,7 +33,7 @@ function Contact() {
 
   return (
     <div className="contact-container">
-      <h1 className="contact-title">Get in Touch with TNC Crypto</h1>
+      <h1 className="contact-title">Get in Touch with SAIGE AI</h1>
       <p className="contact-subtitle">
         Reach out to us for any inquiries, feedback, or assistance. We're here to help you navigate the world of cryptocurrency.
       </p>
@@ -53,7 +53,7 @@ function Contact() {
             </div>
             <div className="contact-item">
               <span className="contact-icon">✉️</span>
-              <span>supportX@tnccrypto.com</span>
+              <span>supportX@SAIGE AI.com</span>
             </div>
           </div>
         </div>

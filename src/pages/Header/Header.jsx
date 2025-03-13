@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../../assets/logo.webp";
+import logo from "../../../public/logo.png";
 import "../Header/Header.css";
 import { useState } from "react";
 
@@ -24,8 +24,9 @@ function Header() {
     <header className="header">
       <div className="container">
         <div className="logo">
-          <Link to="/" onClick={closeMenu}>
+          <Link to="/" onClick={closeMenu} style={{display:'flex',color:'white', textDecoration:'none'}}>
             <img src={logo} alt="TNC CRYPTO" />
+            <h2 style={{marginTop:'8px'}}>SAIGE AI</h2>
           </Link>
         </div>
 

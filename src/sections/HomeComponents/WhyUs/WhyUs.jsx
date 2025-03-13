@@ -11,7 +11,7 @@ function WhyUs() {
         transition={{ duration: 0.6, ease: "easeOut" }}
         viewport={{ once: true }}
       >
-        Why Choose TNC Crypto
+        Why Choose SAIGE AI
       </motion.h1>
 
       <motion.p 
@@ -21,7 +21,7 @@ function WhyUs() {
         transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
         viewport={{ once: true }}
       >
-        Choose TNC Crypto for a secure, innovative, and community-driven cryptocurrency experience.
+        Choose SAIGE AI for a secure, innovative, and community-driven cryptocurrency experience.
       </motion.p>
 
       <div className="features-grid">

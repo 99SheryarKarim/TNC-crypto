@@ -1,5 +1,5 @@
 import "./Footer.css";
-import logo from "../../assets/logo.webp";
+import logo from "../../../public/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebookF,
@@ -19,7 +19,8 @@ function Footer() {
         {/* Logo and Description */}
         <div className="footer-brand">
           <div className="footer-logo">
-            <img src={logo} alt="TNC CRYPTO" className="logo" />
+            <img style={{width:'30px',height:'30px'}} src={logo} alt="SAIGE AI" className="logo" />
+            <h3>SAIGE AI</h3>
           </div>
           <p className="footer-description">
             Embrace the world of digital currency and redefine your investment strategies with us.
@@ -35,7 +36,7 @@ function Footer() {
             </div>
             <div className="contact-item">
               <i className="icon-email"></i>
-              <span>supportX@tnccrypto.com</span>
+              <span>supportX@SAIGE AI.com</span>
             </div>
           </div>
         </div>
@@ -66,7 +67,7 @@ function Footer() {
 
         {/* Newsletter & Social Links */}
         <div className="footer-newsletter">
-          <h3>TNC Crypto Newsletter</h3>
+          <h3>SAIGE AI Newsletter</h3>
           <p>Subscribe to our newsletter for weekly updates, market insights, and special offers.</p>
           <div className="newsletter-form">
             <input type="email" placeholder="Your Email Here" />
@@ -86,7 +87,7 @@ function Footer() {
 
       {/* Copyright */}
       <div className="footer-bottom">
-        <p>Copyright © {currentYear} TNC Crypto | Designed by ThemeNCode LLC - Powered by Webflow.com</p>
+        <p>Copyright © {currentYear} SAIGE AI | Designed by ThemeNCode LLC - Powered by Webflow.com</p>
       </div>
     </footer>
   );

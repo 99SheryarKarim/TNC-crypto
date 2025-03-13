@@ -6,7 +6,7 @@ function JoinUs() {
     <div className="join-container">
       <div className="join-content">
         <h1 className="join-heading">
-          Join TNC Crypto and
+          Join SAIGE AI and
           <br />
           Shape Your Financial Future
         </h1>

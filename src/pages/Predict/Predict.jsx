@@ -1,9 +1,9 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-
 import { PredictionStrategy } from "../PredictionStrategy/PredictStratedy"
 import "./Predict.css"
+import Toast from "../Toast/Toast"
 
 function Predict() {
   const [cryptoData, setCryptoData] = useState([])
@@ -24,6 +24,7 @@ function Predict() {
   const [toastMessage, setToastMessage] = useState("")
   const [selectedStrategy, setSelectedStrategy] = useState("balanced")
   const [isMobile, setIsMobile] = useState(false)
+  const chartContainerRef = useRef(null)
 
   // Check if device is mobile
   useEffect(() => {
@@ -37,17 +38,34 @@ function Predict() {
 
   // Update canvas size on resize
   useEffect(() => {
+    let resizeTimer
+
     const handleResize = () => {
-      if (canvasRef.current) {
-        const container = canvasRef.current.parentElement
+      if (canvasRef.current && chartContainerRef.current) {
+        const container = chartContainerRef.current
+
+        // Set explicit dimensions
         canvasRef.current.width = container.clientWidth
         canvasRef.current.height = container.clientHeight
       }
     }
 
-    handleResize()
-    window.addEventListener("resize", handleResize)
-    return () => window.removeEventListener("resize", handleResize)
+    // Initial sizing with a slight delay to ensure container is rendered
+    resizeTimer = setTimeout(handleResize, 300)
+
+    // Add resize listener with debounce
+    const debouncedResize = () => {
+      clearTimeout(resizeTimer)
+      resizeTimer = setTimeout(handleResize, 300)
+    }
+
+    window.addEventListener("resize", debouncedResize)
+
+    // Clean up
+    return () => {
+      window.removeEventListener("resize", debouncedResize)
+      clearTimeout(resizeTimer)
+    }
   }, [])
 
   // Fetch crypto market data
@@ -122,6 +140,10 @@ function Predict() {
   useEffect(() => {
     if (!selectedCrypto || candleData.length === 0) return
 
+    // Use a ref to track if component is mounted
+    const isMounted = true
+
+    // Reduce update frequency to prevent flickering
     const updateInterval = setInterval(() => {
       // Update current price with small random change
       const volatility = currentPrice * 0.001 // 0.1% volatility
@@ -164,153 +186,168 @@ function Predict() {
 
         return newData
       })
-    }, 1000)
+    }, 2000) // Reduced frequency to 2 seconds instead of 1 second
 
-    return () => clearInterval(updateInterval)
-  }, [selectedCrypto, currentPrice, candleData])
+    return () => {
+      clearInterval(updateInterval)
+    }
+  }, [selectedCrypto, currentPrice])
 
   // Draw the candlestick chart
   useEffect(() => {
     if (!canvasRef.current || candleData.length === 0) return
 
-    const canvas = canvasRef.current
-    const ctx = canvas.getContext("2d")
-    const width = canvas.width
-    const height = canvas.height
+    // Create a stable drawing function
+    const drawChart = () => {
+      const canvas = canvasRef.current
+      if (!canvas) return
 
-    // Clear the canvas
-    ctx.clearRect(0, 0, width, height)
+      const ctx = canvas.getContext("2d")
+      const width = canvas.width
+      const height = canvas.height
 
-    // Draw dark background
-    ctx.fillStyle = "#1c2030"
-    ctx.fillRect(0, 0, width, height)
+      // Clear the canvas
+      ctx.clearRect(0, 0, width, height)
 
-    // Draw grid
-    ctx.strokeStyle = "#2a2e39"
-    ctx.lineWidth = 1
+      // Draw dark background
+      ctx.fillStyle = "#1c2030"
+      ctx.fillRect(0, 0, width, height)
 
-    // Vertical grid lines
-    for (let i = 0; i <= width; i += 50) {
-      const x = i + (chartOffset.x % 50)
-      ctx.beginPath()
-      ctx.moveTo(x, 0)
-      ctx.lineTo(x, height)
-      ctx.stroke()
-    }
-
-    // Horizontal grid lines
-    for (let i = 0; i <= height; i += 50) {
-      const y = i + (chartOffset.y % 50)
-      ctx.beginPath()
-      ctx.moveTo(0, y)
-      ctx.lineTo(width, y)
-      ctx.stroke()
-    }
-
-    // Find min and max prices for scaling
-    let minPrice = Number.MAX_VALUE
-    let maxPrice = Number.MIN_VALUE
-
-    candleData.forEach((candle) => {
-      minPrice = Math.min(minPrice, candle.low)
-      maxPrice = Math.max(maxPrice, candle.high)
-    })
-
-    // Add some padding
-    const padding = (maxPrice - minPrice) * 0.1
-    minPrice -= padding
-    maxPrice += padding
-
-    // Calculate scaling factors
-    const priceRange = maxPrice - minPrice
-    const pixelsPerPriceUnit = height / priceRange
-
-    // Draw price scale on the right
-    ctx.fillStyle = "#ffffff"
-    ctx.font = "12px Arial"
-    ctx.textAlign = "right"
-
-    for (let i = 0; i <= 10; i++) {
-      const price = minPrice + (priceRange * i) / 10
-      const y = height - (price - minPrice) * pixelsPerPriceUnit
-
-      ctx.fillText(price.toFixed(5), width - 10, y)
-
-      // Draw horizontal line for price
+      // Draw grid
       ctx.strokeStyle = "#2a2e39"
-      ctx.beginPath()
-      ctx.moveTo(0, y)
-      ctx.lineTo(width - 60, y)
-      ctx.stroke()
-    }
+      ctx.lineWidth = 1
 
-    // Draw time scale at the bottom
-    const timeWidth = width / 30 // Show about 30 candles
+      // Vertical grid lines
+      for (let i = 0; i <= width; i += 50) {
+        const x = i + (chartOffset.x % 50)
+        ctx.beginPath()
+        ctx.moveTo(x, 0)
+        ctx.lineTo(x, height)
+        ctx.stroke()
+      }
 
-    for (let i = 0; i < 30; i++) {
-      if (candleData.length - 30 + i >= 0) {
-        const candle = candleData[candleData.length - 30 + i]
-        const x = i * timeWidth + chartOffset.x
+      // Horizontal grid lines
+      for (let i = 0; i <= height; i += 50) {
+        const y = i + (chartOffset.y % 50)
+        ctx.beginPath()
+        ctx.moveTo(0, y)
+        ctx.lineTo(width, y)
+        ctx.stroke()
+      }
 
-        if (i % 5 === 0) {
-          // Only show every 5th time label
-          const time = new Date(candle.time)
-          const timeLabel = `${time.getHours()}:${time.getMinutes().toString().padStart(2, "0")}`
+      // Find min and max prices for scaling
+      let minPrice = Number.MAX_VALUE
+      let maxPrice = Number.MIN_VALUE
 
-          ctx.fillStyle = "#6b7280"
-          ctx.textAlign = "center"
-          ctx.fillText(timeLabel, x, height - 5)
+      candleData.forEach((candle) => {
+        minPrice = Math.min(minPrice, candle.low)
+        maxPrice = Math.max(maxPrice, candle.high)
+      })
+
+      // Add some padding
+      const padding = (maxPrice - minPrice) * 0.1
+      minPrice -= padding
+      maxPrice += padding
+
+      // Calculate scaling factors
+      const priceRange = maxPrice - minPrice
+      const pixelsPerPriceUnit = height / priceRange
+
+      // Draw price scale on the right
+      ctx.fillStyle = "#ffffff"
+      ctx.font = "12px Arial"
+      ctx.textAlign = "right"
+
+      for (let i = 0; i <= 10; i++) {
+        const price = minPrice + (priceRange * i) / 10
+        const y = height - (price - minPrice) * pixelsPerPriceUnit
+
+        ctx.fillText(price.toFixed(5), width - 10, y)
+
+        // Draw horizontal line for price
+        ctx.strokeStyle = "#2a2e39"
+        ctx.beginPath()
+        ctx.moveTo(0, y)
+        ctx.lineTo(width - 60, y)
+        ctx.stroke()
+      }
+
+      // Draw time scale at the bottom
+      const timeWidth = width / 30 // Show about 30 candles
+
+      for (let i = 0; i < 30; i++) {
+        if (candleData.length - 30 + i >= 0) {
+          const candle = candleData[candleData.length - 30 + i]
+          const x = i * timeWidth + chartOffset.x
+
+          if (i % 5 === 0) {
+            // Only show every 5th time label
+            const time = new Date(candle.time)
+            const timeLabel = `${time.getHours()}:${time.getMinutes().toString().padStart(2, "0")}`
+
+            ctx.fillStyle = "#6b7280"
+            ctx.textAlign = "center"
+            ctx.fillText(timeLabel, x, height - 5)
+          }
         }
       }
+
+      // Draw candles
+      const candleWidth = Math.max(timeWidth * 0.8, isMobile ? 8 : 4) // Wider candles on mobile
+
+      // Draw from oldest to newest to ensure proper layering
+      for (let i = 0; i < candleData.length; i++) {
+        const candle = candleData[i]
+        // Calculate x position
+        const x = (i - (candleData.length - 30)) * timeWidth + chartOffset.x
+
+        // Skip candles outside the visible area
+        if (x < -candleWidth || x > width) continue
+
+        const open = height - (candle.open - minPrice) * pixelsPerPriceUnit
+        const close = height - (candle.close - minPrice) * pixelsPerPriceUnit
+        const high = height - (candle.high - minPrice) * pixelsPerPriceUnit
+        const low = height - (candle.low - minPrice) * pixelsPerPriceUnit
+
+        // Determine candle color (green for up, red for down)
+        const isUp = close < open // Note: y-axis is inverted in canvas
+        ctx.fillStyle = isUp ? "#26a69a" : "#ef5350"
+        ctx.strokeStyle = isUp ? "#26a69a" : "#ef5350"
+
+        // Draw candle body - ensure width is sufficient and minimum height
+        const bodyHeight = Math.max(Math.abs(close - open), 1) // Minimum height of 1px
+        ctx.fillRect(x - candleWidth / 2, Math.min(open, close), candleWidth, bodyHeight)
+
+        // Draw candle wicks with increased line width for visibility
+        ctx.lineWidth = 2 // Increase line width for better visibility
+        ctx.beginPath()
+        ctx.moveTo(x, high)
+        ctx.lineTo(x, Math.min(open, close))
+        ctx.moveTo(x, Math.max(open, close))
+        ctx.lineTo(x, low)
+        ctx.stroke()
+      }
+
+      // Draw current price line
+      const currentPriceY = height - (currentPrice - minPrice) * pixelsPerPriceUnit
+      ctx.strokeStyle = "#4f9bff"
+      ctx.lineWidth = 1
+      ctx.setLineDash([5, 3])
+      ctx.beginPath()
+      ctx.moveTo(0, currentPriceY)
+      ctx.lineTo(width, currentPriceY)
+      ctx.stroke()
+      ctx.setLineDash([])
+
+      // Draw current price label
+      ctx.fillStyle = "#4f9bff"
+      ctx.textAlign = "left"
+      ctx.fillText(currentPrice.toFixed(5), 10, currentPriceY - 5)
     }
 
-    // Draw candles
-    const candleWidth = Math.max(timeWidth * 0.8, 4) // Make sure candles are visible
-
-    candleData.forEach((candle, i) => {
-      const x = (i - (candleData.length - 30)) * timeWidth + chartOffset.x
-
-      // Skip candles outside the visible area
-      if (x < -candleWidth || x > width) return
-
-      const open = height - (candle.open - minPrice) * pixelsPerPriceUnit
-      const close = height - (candle.close - minPrice) * pixelsPerPriceUnit
-      const high = height - (candle.high - minPrice) * pixelsPerPriceUnit
-      const low = height - (candle.low - minPrice) * pixelsPerPriceUnit
-
-      // Determine candle color (green for up, red for down)
-      const isUp = close < open // Note: y-axis is inverted in canvas
-      ctx.fillStyle = isUp ? "#26a69a" : "#ef5350"
-      ctx.strokeStyle = isUp ? "#26a69a" : "#ef5350"
-
-      // Draw candle body
-      ctx.fillRect(x - candleWidth / 2, Math.min(open, close), candleWidth, Math.abs(close - open))
-
-      // Draw candle wicks
-      ctx.beginPath()
-      ctx.moveTo(x, high)
-      ctx.lineTo(x, Math.min(open, close))
-      ctx.moveTo(x, Math.max(open, close))
-      ctx.lineTo(x, low)
-      ctx.stroke()
-    })
-
-    // Draw current price line
-    const currentPriceY = height - (currentPrice - minPrice) * pixelsPerPriceUnit
-    ctx.strokeStyle = "#4f9bff"
-    ctx.lineWidth = 1
-    ctx.setLineDash([5, 3])
-    ctx.beginPath()
-    ctx.moveTo(0, currentPriceY)
-    ctx.lineTo(width, currentPriceY)
-    ctx.stroke()
-    ctx.setLineDash([])
-
-    // Draw current price label
-    ctx.fillStyle = "#4f9bff"
-    ctx.textAlign = "left"
-    ctx.fillText(currentPrice.toFixed(5), 10, currentPriceY - 5)
-  }, [candleData, chartOffset, currentPrice])
+    // Use requestAnimationFrame for smoother rendering
+    requestAnimationFrame(drawChart)
+  }, [candleData, chartOffset, currentPrice, isMobile])
 
   // Handle mouse events for chart interaction
   const handleMouseDown = (e) => {
@@ -335,6 +372,33 @@ function Predict() {
     setIsDragging(false)
   }
 
+  // Handle touch events for mobile
+  const handleTouchStart = (e) => {
+    if (e.touches.length === 1) {
+      const touch = e.touches[0]
+      setIsDragging(true)
+      setDragStart({
+        x: touch.clientX - chartOffset.x,
+        y: touch.clientY - chartOffset.y,
+      })
+    }
+  }
+
+  const handleTouchMove = (e) => {
+    if (isDragging && e.touches.length === 1) {
+      const touch = e.touches[0]
+      setChartOffset({
+        x: touch.clientX - dragStart.x,
+        y: touch.clientY - dragStart.y,
+      })
+      e.preventDefault() // Prevent scrolling while dragging
+    }
+  }
+
+  const handleTouchEnd = () => {
+    setIsDragging(false)
+  }
+
   // Handle trade execution
   const handleTrade = (direction) => {
     if (pendingTrade) return
@@ -348,12 +412,17 @@ function Predict() {
     setToastMessage(`${direction.toUpperCase()} order placed successfully!`)
     setShowToast(true)
 
+    // Hide toast after 4 seconds
+    setTimeout(() => {
+      setShowToast(false)
+    }, 4000)
+
     // Rest of the trade logic...
     setTimeout(
       () => {
         const exitPrice = currentPrice
         const profit =
-          direction === "up"
+          direction === "buy"
             ? exitPrice > entryPrice
               ? tradeAmount * payout
               : -tradeAmount
@@ -403,19 +472,17 @@ function Predict() {
 
   return (
     <div className="predict-container">
-      {showToast && <Toast message={toastMessage} type="success" onClose={() => setShowToast(false)} />}
+      {showToast && <Toast message={toastMessage} type="success" duration={4000} onClose={() => setShowToast(false)} />}
 
       {/* Header */}
       <div className="predict-header">
         <div className="header-left">
-         
           <div className="platform-name">WEB TRADING PLATFORM</div>
         </div>
         <div className="header-right">
           <div className="notification-icon">
             🔔 <span className="badge">1</span>
           </div>
-          {/* <div className="message-icon">📨</div> */}
           <div className="account-balance">
             <div className="balance-label">LIVE ACCOUNT</div>
             <div className="balance-amount">$0.00</div>
@@ -428,9 +495,67 @@ function Predict() {
       {/* Main Content */}
       <div className="predict-content">
         {isMobile ? (
-          // Mobile view
+          // Mobile view with chart
           <div className="mobile-view">
             <h1 className="mobile-title">Prediction</h1>
+
+            {/* Chart Container for Mobile */}
+            <div className="mobile-chart-container" ref={chartContainerRef}>
+              <canvas
+                ref={canvasRef}
+                style={{ width: "100%", height: "100%" }} // Add inline style
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+              />
+            </div>
+
+            <div className="mobile-timeframe-selector">
+              <button className={timeFrame === "1m" ? "active" : ""} onClick={() => setTimeFrame("1m")}>
+                1m
+              </button>
+              <button className={timeFrame === "5m" ? "active" : ""} onClick={() => setTimeFrame("5m")}>
+                5m
+              </button>
+              <button className={timeFrame === "15m" ? "active" : ""} onClick={() => setTimeFrame("15m")}>
+                15m
+              </button>
+              <button className={timeFrame === "1h" ? "active" : ""} onClick={() => setTimeFrame("1h")}>
+                1h
+              </button>
+              <button className={timeFrame === "1d" ? "active" : ""} onClick={() => setTimeFrame("1d")}>
+                1d
+              </button>
+            </div>
+
+            <div className="mobile-trading-controls">
+              <div className="mobile-investment-control">
+                <div className="control-label">Investment</div>
+                <div className="control-buttons">
+                  <button onClick={decreaseInvestment}>−</button>
+                  <span>${investment}</span>
+                  <button onClick={increaseInvestment}>+</button>
+                </div>
+              </div>
+
+              <div className="mobile-time-control">
+                <div className="control-label">Time</div>
+                <div className="control-buttons">
+                  <button onClick={decreaseTime}>−</button>
+                  <span>{selectedTime} min</span>
+                  <button onClick={increaseTime}>+</button>
+                </div>
+              </div>
+
+              <div className="mobile-trade-buttons">
+                <button className="mobile-trade-buy" onClick={() => handleTrade("buy")} disabled={pendingTrade}>
+                  BUY
+                </button>
+                <button className="mobile-trade-sell" onClick={() => handleTrade("sell")} disabled={pendingTrade}>
+                  SELL
+                </button>
+              </div>
+            </div>
 
             <div className="coins-section">
               <h2>Coins to predict</h2>
@@ -445,11 +570,9 @@ function Predict() {
             </div>
 
             <PredictionStrategy selectedStrategy={selectedStrategy} onSelectStrategy={setSelectedStrategy} />
-
-            <button className="predict-button">Predict</button>
           </div>
         ) : (
-          // Desktop view - previous layout
+          // Desktop view
           <>
             <div className="left-sidebar">
               <div className="sidebar-item active">
@@ -498,7 +621,7 @@ function Predict() {
               </div>
 
               {/* Chart Canvas */}
-              <div className="chart-container">
+              <div className="chart-container" ref={chartContainerRef}>
                 <canvas
                   ref={canvasRef}
                   width={1200}
@@ -584,14 +707,14 @@ function Predict() {
                 </div>
 
                 <div className="trade-buttons">
-                  <button className="trade-button up" onClick={() => handleTrade("up")} disabled={pendingTrade}>
-                    Up
+                  <button className="trade-button buy" onClick={() => handleTrade("buy")} disabled={pendingTrade}>
+                    BUY
                   </button>
 
                   <div className="payout-info">Your payout: {payout} $</div>
 
-                  <button className="trade-button down" onClick={() => handleTrade("down")} disabled={pendingTrade}>
-                    Down
+                  <button className="trade-button sell" onClick={() => handleTrade("sell")} disabled={pendingTrade}>
+                    SELL
                   </button>
                 </div>
 

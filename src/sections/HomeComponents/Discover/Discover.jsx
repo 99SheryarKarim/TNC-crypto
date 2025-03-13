@@ -33,9 +33,9 @@ const Discover = () => {
           animate={rightInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 1, ease: "easeInOut", delay: 0.3 }}
         >
-          <h2>Discover the Future of Finance with TNC Crypto</h2>
+          <h2>Discover the Future of Finance with SAIGE AI</h2>
           <p>
-            Welcome to TNC Crypto, your trusted partner in the digital currency realm. <br />
+            Welcome to SAIGE AI, your trusted partner in the digital currency realm. <br />
             Whether you’re just starting out or are an experienced trader, our platform <br />
             offers a comprehensive suite of tools to help you make informed decisions <br />
             and maximize your investments.
