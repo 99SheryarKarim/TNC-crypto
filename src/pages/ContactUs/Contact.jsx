@@ -21,9 +21,7 @@ function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // Handle form submission logic here
     console.log("Form submitted:", formData)
-    // Reset form after submission
     setFormData({
       name: "",
       email: "",
@@ -37,17 +35,13 @@ function Contact() {
     <div className="contact-container">
       <h1 className="contact-title">Get in Touch with TNC Crypto</h1>
       <p className="contact-subtitle">
-        Reach out to us for any inquiries, feedback, or assistance. We're here to help you navigate the world of
-        cryptocurrency.
+        Reach out to us for any inquiries, feedback, or assistance. We're here to help you navigate the world of cryptocurrency.
       </p>
 
       <div className="contact-content">
         <div className="contact-info">
-          <h2>Let's Start Working Together. Get in Touch with Us!</h2>
-          <p>
-            Let's Collaborate for a Brighter Crypto Future Whether you have questions about our services or need support
-            with your account, our dedicated team is ready to assist.
-          </p>
+          <h2>Let's Start Working Together</h2>
+          <p>Whether you have questions or need support, our team is ready to assist.</p>
           <div className="contact-details">
             <div className="contact-item">
               <span className="contact-icon">🏠</span>
@@ -78,28 +72,13 @@ function Contact() {
             </div>
             <div className="form-group">
               <label htmlFor="contactNo">Contact No</label>
-              <input
-                type="tel"
-                id="contactNo"
-                name="contactNo"
-                value={formData.contactNo}
-                onChange={handleChange}
-                required
-              />
+              <input type="tel" id="contactNo" name="contactNo" value={formData.contactNo} onChange={handleChange} required />
             </div>
             <div className="form-group">
               <label htmlFor="message">Message</label>
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-              ></textarea>
+              <textarea id="message" name="message" value={formData.message} onChange={handleChange} required></textarea>
             </div>
-            <button type="submit" className="submit-btn">
-              Submit
-            </button>
+            <button type="submit" className="submit-btn">Submit</button>
           </form>
         </div>
       </div>
@@ -108,4 +87,3 @@ function Contact() {
 }
 
 export default Contact
-
