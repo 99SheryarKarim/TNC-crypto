@@ -39,7 +39,7 @@ function Header() {
         <nav className={`nav-menu ${isMenuOpen ? "active" : ""}`}>
           <ul>
             <li><Link to="/" onClick={closeMenu}>Home</Link></li>
-            <li><Link to="/coins" onClick={closeMenu}>Coins</Link></li>
+            <li><Link to="/coins" onClick={closeMenu}>Market  </Link></li>
             <li><Link to="/predict" onClick={closeMenu}>Predict</Link></li>
             <li><Link to="/portfolio" onClick={closeMenu}>Portfolio</Link></li>
             <li className="no-wrap"><Link to="/gopro" onClick={closeMenu}>Go Premium</Link></li>
