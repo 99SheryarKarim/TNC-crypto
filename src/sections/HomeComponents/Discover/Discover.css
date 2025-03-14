@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap; /* Allows items to stack on smaller screens */
+    flex-wrap: wrap;
     width: 100%;
     min-height: 100vh;
     background-color: #1e2340;
@@ -31,7 +31,6 @@
 /* Right Section - Text */
 .discover-right {
     flex: 1;
-    text-align: left;
     color: white;
     max-width: 50%;
 }
@@ -43,12 +42,39 @@
     font-family: "Chakra Petch", sans-serif;
 }
 
-.discover-right p {
-    font-size: clamp(14px, 1.5vw, 15px);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    max-width: 85%;
-    line-height: 1.6;
-    color: rgb(220, 220, 220);
+.highlight {
+    color: #30aca6;
+}
+
+/* List Styling */
+.discover-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.discover-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+}
+
+.discover-list li:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(5px);
+}
+
+.bullet {
+    width: 10px;
+    height: 10px;
+    background-color: #30aca6;
+    border-radius: 50%;
 }
 
 /* Crypto Section */
@@ -74,19 +100,6 @@
     align-items: center;
     padding: 50px 5%;
     position: relative;
- 
-}
-
-.animvideo::before {
-    content: "";
-    position: absolute;
-    width: 80%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(77, 166, 255, 0.3) 0%, transparent 80%);
-    border-radius: 20px;
-    filter: blur(40px);
-    z-index: 0;
-
 }
 
 .animvideo video {
@@ -95,28 +108,7 @@
     height: auto;
     border-radius: 10px;
     border: 7px solid black;
-    position: relative;
-    z-index: 1;
     box-shadow: 0px 0px 50px rgba(77, 166, 255, 0.5);
-}
-
-
-.content {
-    max-width: 800px;
-    margin: 0 auto;
-    padding-bottom: 40px;
-}
-
-.content h2 {
-    font-size: clamp(28px, 4vw, 48px);
-    font-family: "Chakra Petch", sans-serif;
-    margin-bottom: 16px;
-}
-
-.content p {
-    font-size: clamp(14px, 2vw, 18px);
-    line-height: 1.6;
-    color: rgb(80, 75, 75);
 }
 
 /* Responsive Design */
@@ -136,11 +128,6 @@
         font-size: 36px;
     }
 
-    .discover-right p {
-        font-size: 16px;
-        max-width: 100%;
-    }
-
     .discover-image {
         width: 70%;
         margin-top: 40px;
@@ -148,41 +135,21 @@
 }
 
 @media (max-width: 768px) {
-    .discover {
-        gap: 30px;
+    .discover-list li {
+        padding: 10px;
     }
 
     .discover-right h2 {
         font-size: 28px;
     }
-
-    .discover-right p {
-        font-size: 15px;
-    }
-
-    .discover-image {
-        width: 60%;
-    }
 }
 
 @media (max-width: 480px) {
-    .discover {
-        padding: 15% 5%;
-    }
-
-    .discover-right h2 {
-        font-size: 24px;
-    }
-
-    .discover-right p {
-        font-size: 14px;
+    .discover-list li {
+        padding: 8px;
     }
 
     .discover-image {
         width: 75%;
-    }
-
-    .animvideo video {
-        max-width: 90%;
     }
 }

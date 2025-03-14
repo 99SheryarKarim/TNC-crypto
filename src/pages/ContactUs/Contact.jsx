@@ -53,7 +53,7 @@ function Contact() {
             </div>
             <div className="contact-item">
               <span className="contact-icon">✉️</span>
-              <span>supportX@SAIGE AI.com</span>
+              <span>supportX@SAIGE AI .com</span>
             </div>
           </div>
         </div>

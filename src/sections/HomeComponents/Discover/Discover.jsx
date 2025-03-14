@@ -33,13 +33,21 @@ const Discover = () => {
           animate={rightInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 1, ease: "easeInOut", delay: 0.3 }}
         >
-          <h2>Discover the Future of Finance with SAIGE AI</h2>
-          <p>
-            Welcome to SAIGE AI, your trusted partner in the digital currency realm. <br />
-            Whether you’re just starting out or are an experienced trader, our platform <br />
-            offers a comprehensive suite of tools to help you make informed decisions <br />
-            and maximize your investments.
-          </p>
+          <h2>Discover the Future of Finance with <span className="highlight">SAIGE AI</span></h2>
+          <ul className="discover-list">
+            <li>
+              <span className="bullet"></span>
+              <p>Bitcoin Surges Past $100,000: What's Driving the Rally?</p>
+            </li>
+            <li>
+              <span className="bullet"></span>
+              <p>Tech Stocks to Watch in 2025: AI and Quantum Computing Leaders</p>
+            </li>
+            <li>
+              <span className="bullet"></span>
+              <p>Decentralized Finance (DeFi) Revolution: How It's Reshaping Banking</p>
+            </li>
+          </ul>
         </motion.div>
       </section>
 
@@ -56,7 +64,7 @@ const Discover = () => {
         </motion.div>
       </section>
 
-      {/* Video Section (No Animation) */}
+      {/* Video Section */}
       <div className="animvideo">
         <video width="100%" height="auto" autoPlay loop muted playsInline>
           <source src="64b0e26d47182da9cb63e551_-ebb1-4a54-ad70-1c3c8ebd2d34-transcode.mp4" type="video/mp4" />

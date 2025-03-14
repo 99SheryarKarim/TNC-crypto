@@ -46,8 +46,8 @@ function WhyUs() {
 
 const features = [
   {
-    title: "Unmatched Expertise",
-    description: "Our team of crypto experts constantly monitors the market to provide you with the latest insights and trends.",
+    title: "Market Analysis",
+    description: "Unlock the Secrets of Market Movements",
     icon: (
       <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="30" cy="30" r="25" fill="#e6f0fa" />
@@ -56,8 +56,8 @@ const features = [
     ),
   },
   {
-    title: "Intuitive User Interface",
-    description: "Navigate our platform with ease, making your trading experience smooth and efficient.",
+    title: "Technical Analysis",
+    description: "Moving Averages: Understand trend directions with our interactive charts",
     icon: (
       <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="15" y="15" width="30" height="25" rx="2" fill="#e6f0fa" stroke="#0066CC" strokeWidth="2" />
@@ -66,8 +66,8 @@ const features = [
     ),
   },
   {
-    title: "Robust Security",
-    description: "We prioritize your safety with top-tier encryption and security measures to keep your assets secure.",
+    title: "RSI (Relative Strength Index)",
+    description: " Gauge overbought and oversold conditions",
     icon: (
       <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M30 10L45 20V40L30 50L15 40V20L30 10Z" fill="#0066CC" />
@@ -75,8 +75,8 @@ const features = [
     ),
   },
   {
-    title: "24/7 Customer Support",
-    description: "Our dedicated support team is available around the clock to assist you with any inquiries or issues.",
+    title: "Social Media Sentiment Analysis",
+    description: "Track mentions and sentiment across platforms",
     icon: (
       <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="30" cy="30" r="25" fill="#e6f0fa" />
@@ -85,8 +85,8 @@ const features = [
     ),
   },
   {
-    title: "Fast Transactions",
-    description: "Experience lightning-fast transactions with minimal fees, ensuring seamless trading.",
+    title: "Fundamental Analysis",
+    description: "Cryptocurrency On-Chain Metrics: Active addresses, transaction volume, and more",
     icon: (
       <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="30" cy="30" r="25" fill="#e6f0fa" />
@@ -95,8 +95,8 @@ const features = [
     ),
   },
   {
-    title: "Secure and Reliable",
-    description: "Experience lightning-fast transactions with minimal fees, ensuring seamless trading.",
+    title: "Stock Fundamentals",
+    description: "P/E ratios, earnings reports, and growth projections",
     icon: (
       <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="30" cy="30" r="25" fill="#e6f0fa" />

@@ -3,13 +3,12 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
-import "./FAQ.css"
+import "../Info/Info.css"
 
-function FAQ() {
+function Info() {
   const [openFAQ, setOpenFAQ] = useState(null)
   const [showQuestions, setShowQuestions] = useState(false)
 
-  // Detect when the component enters viewport
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 })
 
   useEffect(() => {
@@ -19,18 +18,11 @@ function FAQ() {
   }, [inView])
 
   const faqData = [
-    { question: "What is cryptocurrency?", answer: "Cryptocurrency is a digital or virtual form of currency..." },
-    { question: "How do I buy cryptocurrency?", answer: "You can buy cryptocurrency through exchanges, brokers..." },
-    { question: "What is a digital wallet?", answer: "A digital wallet is a software program that stores..." },
-    { question: "Is cryptocurrency safe?", answer: "While cryptocurrency technology itself is secure..." },
+    { question: "What's the difference between cryptocurrencies and stocks?", answer: "Cryptocurrencies are digital assets using blockchain technology, while stocks represent ownership in companies..." },
+    { question: "How do I start investing in cryptocurrencies?", answer: "Begin by researching reputable exchanges, understanding wallet security, and starting with a small amount..." },
+    { question: "What are the risks of trading stocks and cryptocurrencies?", answer: "Both markets involve volatility risk, but cryptocurrencies often experience more extreme price swings..." },
+    { question: "What tax implications should I be aware of when trading?", answer: "Cryptocurrency and stock trades may be subject to capital gains tax. Consult a tax professional for personalized advice..." },
     { question: "Are cryptocurrency transactions anonymous?", answer: "Cryptocurrency transactions are pseudonymous..." },
-    { question: "What is blockchain?", answer: "Blockchain is a distributed digital ledger that records..." },
-    { question: "How do I start trading on TNC Crypto?", answer: "To start trading on TNC Crypto, create an account..." },
-    { question: "What security measures does TNC Crypto implement?", answer: "TNC Crypto implements multiple security measures..." },
-    { question: "Can I access TNC Crypto on my mobile device?", answer: "Yes, TNC Crypto is fully accessible on mobile..." },
-    { question: "How do I withdraw my funds from TNC Crypto?", answer: "To withdraw funds, navigate to the withdrawal section..." },
-    { question: "What fees are associated with trading on TNC Crypto?", answer: "Our fee structure includes trading fees, withdrawal fees..." },
-    { question: "Do you offer any educational resources for beginners?", answer: "Yes, we provide comprehensive educational resources..." },
   ]
 
   const toggleFAQ = (index) => {
@@ -41,7 +33,7 @@ function FAQ() {
     <div ref={ref} className="faq-container">
       <h1 className="faq-heading">Frequently Asked Questions</h1>
       <p className="faq-subtitle">
-        Discover quick answers to common queries in our comprehensive FAQ section.
+        Get quick answers to common queries in our FAQ section.
       </p>
 
       <div className="faq-grid">
@@ -56,7 +48,13 @@ function FAQ() {
           >
             <div className="faq-question">
               <span>{faq.question}</span>
-              <span className="faq-icon">{openFAQ === index ? "−" : "+"}</span>
+              <motion.span
+                className="faq-icon"
+                animate={{ rotate: openFAQ === index ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                {openFAQ === index ? "−" : "+"}
+              </motion.span>
             </div>
             <motion.div
               className="faq-answer"
@@ -73,4 +71,4 @@ function FAQ() {
   )
 }
 
-export default FAQ
+export default Info

@@ -4,7 +4,10 @@ import Home from "./pages/Home";
 import ContactUs from "./pages/ContactUs/Contact";
 import Coins from "./pages/Coins/Coins";
 import Predict from "./pages/Predict/Predict";
-import GoPro from "./pages/GoPro/GoPro";  // ✅ Import GoPro Page
+import GoPro from "./pages/GoPro/GoPro";
+import Portfolio from "./pages/Portfolio/Portfolio";
+import Signup from "./pages/Signup/Signup";
+import Info from "./pages/Info/Info"; // ✅ Import Info Page
 import Header from "./pages/Header/Header";
 
 function App() {
@@ -30,17 +33,28 @@ function App() {
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/coins" element={<Coins />} />
         <Route path="/predict" element={<Predict />} />
-        <Route path="/gopro" element={<GoPro />} />  {/* ✅ Add GoPro Route */}
+        <Route path="/gopro" element={<GoPro />} />
+        <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/info" element={<Info />} /> {/* ✅ Fixed Route Path */}
       </Routes>
+
       {showButton && (
         <button
           onClick={scrollToTop}
           style={{
-            position: "fixed", bottom: "20px", right: "20px",
-            backgroundColor: "#007bff", color: "white",
-            border: "none", padding: "12px 18px",
-            borderRadius: "8px", fontSize: "16px", cursor: "pointer",
-            boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.2)", transition: "all 0.3s ease"
+            position: "fixed",
+            bottom: "20px",
+            right: "20px",
+            backgroundColor: "#007bff",
+            color: "white",
+            border: "none",
+            padding: "12px 18px",
+            borderRadius: "8px",
+            fontSize: "16px",
+            cursor: "pointer",
+            boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.2)",
+            transition: "all 0.3s ease",
           }}
         >
           ↑

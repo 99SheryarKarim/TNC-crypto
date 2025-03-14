@@ -5,7 +5,7 @@ import { useState } from "react";
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const navigate = useNavigate(); // ✅ useNavigate for navigation
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -16,17 +16,17 @@ function Header() {
   };
 
   const handleContactClick = () => {
-    closeMenu(); // ✅ Close menu on click
-    navigate("/contact"); // ✅ Navigate to Contact Us page
+    closeMenu();
+    navigate("/contact");
   };
 
   return (
     <header className="header">
       <div className="container">
         <div className="logo">
-          <Link to="/" onClick={closeMenu} style={{display:'flex',color:'white', textDecoration:'none'}}>
+          <Link to="/" onClick={closeMenu} style={{ display: "flex", color: "white", textDecoration: "none" }}>
             <img src={logo} alt="TNC CRYPTO" />
-            <h2 style={{marginTop:'8px'}}>SAIGE AI</h2>
+            <h2 style={{ marginTop: "8px" }}>SAIGE AI</h2>
           </Link>
         </div>
 
@@ -43,7 +43,8 @@ function Header() {
             <li><Link to="/predict" onClick={closeMenu}>Predict</Link></li>
             <li><Link to="/portfolio" onClick={closeMenu}>Portfolio</Link></li>
             <li className="no-wrap"><Link to="/gopro" onClick={closeMenu}>Go Premium</Link></li>
-            <li><Link to="/faq" onClick={closeMenu}>FAQ</Link></li>
+            <li><Link to="/info" onClick={closeMenu}>Info</Link></li> {/* ✅ Fixed FAQ Link */}
+            <li><Link to="/signup" onClick={closeMenu}>Signup</Link></li>
           </ul>
 
           <button className="contact-btn" onClick={handleContactClick}>

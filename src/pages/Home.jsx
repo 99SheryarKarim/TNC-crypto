@@ -10,7 +10,7 @@ import Carousel from "../sections/HomeComponents/Carousel/Carousel";
 import Discover from "../sections/HomeComponents/Discover/Discover";
 import WhyUs from "../sections/HomeComponents/WhyUs/WhyUs";
 import PricingCards from "../sections/HomeComponents/Pricing/Pricing";
-import FAQ from "../sections/HomeComponents/FAQ/FAQ";
+import Info from "./../pages/Info/Info";
 import JoinUs from "../sections/HomeComponents/JoinUs/JoinUs";
 import Footer from "./Footer/Footer";
 import Contact from "./ContactUs/Contact";
@@ -44,7 +44,7 @@ function Home() {
           </div>
           <WhyUs />
           <PricingCards />
-          <FAQ />
+          {/* <Info /> */}
           <JoinUs />
           <Footer />
         </>

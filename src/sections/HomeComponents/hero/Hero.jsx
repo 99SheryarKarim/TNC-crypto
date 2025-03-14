@@ -23,7 +23,7 @@ const Hero = () => {
           animate="visible"
           custom={0}
         >
-          Experience the Future <br /> of Cryptocurrency <br /> Trading
+       Welcome to SAIGE AI, your Cryptocurrency guide and prediction model
         </motion.h1>
 
         <motion.p
@@ -32,9 +32,7 @@ const Hero = () => {
           animate="visible"
           custom={1}
         >
-          Dive into a seamless and secure platform designed for both beginners and
-          seasoned traders. Navigate the dynamic world of cryptocurrencies with
-          TNC Crypto.
+       Dive into the world of cryptocurrencies and stocks with SAIGE AI. We provide cutting-edge analysis, real-time data, and educational resources to help you navigate the complex world of digital assets and traditional markets.
         </motion.p>
 
         <div className="hero-buttons">
