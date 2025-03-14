@@ -1,7 +1,7 @@
 .footer {
   background-color: #1b1b2f;
   color: #fff;
-  padding: 60px 20px 20px; /* Added side padding for better spacing */
+  padding: 60px 0 20px;
   font-family: Arial, sans-serif;
   width: 100%;
   box-sizing: border-box;
@@ -11,27 +11,31 @@
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
   gap: 40px;
+  padding: 0 20px;
 }
 
 /* Brand Section */
 .footer-brand {
   max-width: 100%;
-  text-align: center;
 }
 
 .footer-logo {
   display: flex;
   align-items: center;
   gap: 10px;
-  justify-content: center;
   margin-bottom: 20px;
 }
 
 .footer-logo img {
-  width: 180px; /* Adjusted for better mobile display */
-  height: auto;
+  width: 30px;
+  height: 30px;
+}
+
+.footer-logo h3 {
+  margin: 0;
+  font-size: 20px;
 }
 
 .footer-description {
@@ -45,24 +49,18 @@
 .contact-info {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  align-items: center;
+  gap: 15px;
 }
 
 .contact-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 10px;
   color: #b4b4b4;
   font-size: 14px;
-  text-align: center;
 }
 
 /* Links Sections */
-.footer-links {
-  text-align: center;
-}
-
 .footer-links h3 {
   color: #fff;
   font-size: 18px;
@@ -92,26 +90,33 @@
 }
 
 /* Newsletter Section */
-.footer-newsletter {
-  text-align: center;
+.footer-newsletter h3 {
+  color: #fff;
+  font-size: 18px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.footer-newsletter p {
+  color: #b4b4b4;
+  font-size: 14px;
+  margin-bottom: 20px;
+  line-height: 1.6;
 }
 
 .newsletter-form {
   display: flex;
-  flex-direction: column;
   gap: 10px;
-  align-items: center;
+  margin-bottom: 30px;
 }
 
 .newsletter-form input {
-  width: 100%;
-  max-width: 300px;
+  flex: 1;
   padding: 12px;
   border: 1px solid #3eb8b0;
   border-radius: 4px;
   background-color: transparent;
   color: #fff;
-  box-sizing: border-box;
 }
 
 .newsletter-form button {
@@ -122,6 +127,7 @@
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  white-space: nowrap;
 }
 
 .newsletter-form button:hover {
@@ -131,7 +137,6 @@
 /* Social Links */
 .social-links {
   display: flex;
-  justify-content: center;
   gap: 15px;
   flex-wrap: wrap;
 }
@@ -165,45 +170,112 @@
 .footer-bottom p {
   color: #b4b4b4;
   font-size: 14px;
+  margin: 0;
 }
 
 /* Responsive Design */
 @media (max-width: 1024px) {
   .footer-content {
-      grid-template-columns: 1fr 1fr;
-      gap: 30px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 30px;
   }
 }
 
 @media (max-width: 768px) {
+  .footer {
+    padding: 40px 0 20px;
+  }
+  
   .footer-content {
-      grid-template-columns: 1fr;
-      text-align: center;
-      gap: 30px;
+    grid-template-columns: 1fr;
+    gap: 30px;
   }
-
+  
+  .footer-brand, 
+  .footer-links, 
+  .footer-newsletter {
+    text-align: center;
+  }
+  
   .footer-logo {
-      justify-content: center;
+    justify-content: center;
   }
-
+  
   .contact-info {
-      align-items: center;
+    align-items: center;
   }
-
+  
+  .contact-item {
+    justify-content: center;
+    text-align: center;
+  }
+  
   .newsletter-form {
-      flex-direction: column;
+    flex-direction: column;
+    align-items: center;
   }
-
+  
+  .newsletter-form input {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .newsletter-form button {
+    width: 100%;
+    max-width: 300px;
+  }
+  
   .social-links {
-      justify-content: center;
+    justify-content: center;
+    margin-top: 20px;
   }
 }
 
 @media (max-width: 480px) {
-  .footer-content {
-      padding: 0 10px;
+  .footer {
+    padding: 30px 0 15px;
   }
-  .newsletter-form input {
-      width: 90%;
+  
+  .footer-content {
+    gap: 25px;
+    padding: 0 15px;
+  }
+  
+  .footer-logo h3 {
+    font-size: 18px;
+  }
+  
+  .footer-links h3,
+  .footer-newsletter h3 {
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+  
+  .footer-links li {
+    margin-bottom: 8px;
+  }
+  
+  .footer-links a,
+  .footer-description,
+  .contact-item,
+  .footer-newsletter p,
+  .footer-bottom p {
+    font-size: 13px;
+  }
+  
+  .newsletter-form input,
+  .newsletter-form button {
+    padding: 10px;
+    font-size: 13px;
+  }
+  
+  .social-icon {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .footer-bottom {
+    margin-top: 25px;
+    padding: 15px;
   }
 }
