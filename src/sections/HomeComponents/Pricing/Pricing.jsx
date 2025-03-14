@@ -1,9 +1,9 @@
 "use client";
 
-import { Check, X } from "lucide-react";
+import { Check, X } from 'lucide-react';
 import { useState } from "react";
 import { motion } from "framer-motion";
-import "../Pricing/Pricing.css";
+import "./Pricing.css";
 
 export default function Pricing() {
   const [hoveredCard, setHoveredCard] = useState(null);
