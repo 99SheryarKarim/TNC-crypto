@@ -4,10 +4,11 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     background-color: #1e2340;
-    padding: 0 5%;
+    padding: 60px 5%;
     gap: 40px;
+    box-sizing: border-box;
 }
 
 /* Left Section Styling */
@@ -27,6 +28,7 @@
     margin-bottom: 30px;
     margin-left: 20px;
     font-family: "Chakra Petch", sans-serif;
+    line-height: 1.2;
 }
 
 /* Responsive Paragraph */
@@ -45,13 +47,14 @@
     gap: 20px;
     margin-top: 40px;
     margin-left: 20px;
+    flex-wrap: wrap;
 }
 
 /* Pricing Table Button */
 .pricing-btn {
     background-color: #30aca6;
     color: white;
-    font-size: 18px;
+    font-size: clamp(14px, 2vw, 18px);
     padding: 12px 24px;
     border: none;
     border-radius: 6px;
@@ -65,7 +68,7 @@
 .download-btn {
     background-color: #ffd700;
     color: black;
-    font-size: 18px;
+    font-size: clamp(14px, 2vw, 18px);
     padding: 12px 24px;
     border: none;
     border-radius: 6px;
@@ -115,12 +118,14 @@
     }
 }
 
-/* 🔹 Responsive Design for Tablets & Mobile */@media (max-width: 1024px) {
+/* 🔹 Responsive Design for Tablets & Mobile */
+@media (max-width: 1024px) {
     .hero {
         flex-direction: column-reverse; /* Moves image above text */
         text-align: center;
         height: auto;
-        padding: 10% 5%;
+        padding: 80px 5%;
+        gap: 30px;
     }
 
     .hero-left,
@@ -128,20 +133,89 @@
         width: 100%;
     }
 
-    .hero-buttons {
-        justify-content: center;
-    }
-
-    .hero-left h1 {
-        font-size: 32px;
+    .hero-left h1,
+    .hero-left p {
+        margin-left: 0;
+        margin-right: 0;
     }
 
     .hero-left p {
-        font-size: 18px;
-        max-width: 100%;
+        margin: 0 auto 20px;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+        margin-left: 0;
     }
 
     .hero-image {
         width: 70%;
+        max-width: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 60px 5%;
+        gap: 20px;
+    }
+
+    .hero-left h1 {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+
+    .hero-left p {
+        font-size: 16px;
+    }
+
+    .hero-buttons {
+        gap: 15px;
+        margin-top: 30px;
+    }
+
+    .pricing-btn,
+    .download-btn {
+        padding: 10px 20px;
+    }
+
+    .hero-image {
+        width: 80%;
+        max-width: 350px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 40px 4%;
+    }
+
+    .hero-left h1 {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+
+    .hero-left p {
+        font-size: 14px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+        max-width: 250px;
+        margin: 20px auto 0;
+        gap: 12px;
+    }
+
+    .pricing-btn,
+    .download-btn {
+        width: 100%;
+        padding: 12px 15px;
+        font-size: 14px;
+    }
+
+    .hero-image {
+        width: 90%;
+        max-width: 280px;
     }
 }

@@ -573,8 +573,9 @@
   }
   
   .feature-card {
-    background-color: #1c2030;
+    background-color: #4c567c;
     border-radius: 12px;
+    
     padding: 20px;
     display: flex;
     flex-direction: column;
