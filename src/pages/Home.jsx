@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import "../pages/Home.css";
 import logo from "../assets/logo.webp";
 import Hero from "../sections/HomeComponents/hero/Hero";
-import Carousel from "../sections/HomeComponents/Carousel/Carousel";
+
 import Discover from "../sections/HomeComponents/Discover/Discover";
 import WhyUs from "../sections/HomeComponents/WhyUs/WhyUs";
 import PricingCards from "../sections/HomeComponents/Pricing/Pricing";
@@ -38,7 +38,7 @@ function Home() {
       ) : (
         <>
           <Hero />
-          <Carousel />
+          {/* <Carousel /> */}
           <div style={{ marginTop: "-105px" }}>
             <Discover />
           </div>
